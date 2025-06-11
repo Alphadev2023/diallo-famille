@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 import json
 import random
 import uuid
-from .forms import PaiementForm
+
 from .models import Cotisation
 
 

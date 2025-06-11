@@ -1,6 +1,10 @@
 from django import forms
 from .models import Cotisation
 
+class PaiementForm(forms.Form):
+   numero_client = forms.CharField(label="Numéro Orange", max_length=20)
+   montant = forms.DecimalField(label="Montant", min_value=100)
+
 class CotisationForm(forms.ModelForm):
  class Meta:
   model = Cotisation
@@ -10,6 +14,4 @@ class CotisationForm(forms.ModelForm):
    'motif': forms.Textarea(attrs={'rows': 2}),
   }
  
- class PaiementForm(forms.Form):
-    numero_client = forms.CharField(label="Numéro Orange", max_length=20)
-    montant = forms.DecimalField(label="Montant", min_value=100)
+ 
