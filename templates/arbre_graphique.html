@@ -1,0 +1,86 @@
+<div
+  id="details"
+  style="margin-top: 20px; border: 1px solid #ccc; padding: 10px; width: 400px"
+>
+  <h3>Détails de la personne</h3>
+  <div id="personne_info">Cliquez sur un noeud pour voir les cotisations</div>
+  <h4>Ajouter un paiement Orange Money</h4>
+  <form id="paiement_form">
+    <input type="hidden" id="personne_id" name="personne_id" />
+    <label>Montant (XOF): <input type="number" name="montant" required /></label
+    ><br /><br />
+    <label
+      >Référence paiement:
+      <input type="text" name="reference" required /></label
+    ><br /><br />
+    <label>Motif: <input type="text" name="motif" /></label><br /><br />
+    <button type="submit">Valider paiement</button>
+  </form>
+  <div id="message"></div>
+</div>
+
+<script>
+  // Lorsque l'utilisateur clique sur un noeud, on récupère les cotisations
+  network.on("click", function (params) {
+    if (params.nodes.length === 1) {
+      const nodeId = params.nodes[0];
+      document.getElementById("personne_id").value = nodeId;
+
+      fetch(`/api/cotisations/${nodeId}/`)
+        .then((response) => response.json())
+        .then((data) => {
+          let html = "<ul>";
+          if (data.length === 0)
+            html += "<li>Aucune cotisation enregistrée</li>";
+          else {
+            data.forEach((c) => {
+              html += `<li>${c.date_paiement} - ${c.montant} XOF - ${
+                c.mode_paiement
+              } - Ref: ${c.reference} - ${c.motif || ""}</li>`;
+            });
+          }
+          html += "</ul>";
+          document.getElementById("personne_info").innerHTML = html;
+        });
+    }
+  });
+
+  // Gestion du formulaire de paiement Orange Money
+  document
+    .getElementById("paiement_form")
+    .addEventListener("submit", function (e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const data = {
+        personne: formData.get("personne_id"),
+        montant: formData.get("montant"),
+        mode_paiement: "Orange Money",
+        reference: formData.get("reference"),
+        motif: formData.get("motif"),
+      };
+
+      fetch("/api/cotisations/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": "{{ csrf_token }}", // Assure-toi que csrf_token est bien dans le template
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          if (response.ok) {
+            document.getElementById("message").innerText =
+              "Paiement ajouté avec succès !";
+            this.reset();
+            // Rafraîchir les cotisations affichées
+            document.getElementById("personne_info").innerHTML = "";
+          } else {
+            document.getElementById("message").innerText =
+              "Erreur lors de l'ajout du paiement.";
+          }
+        })
+        .catch(() => {
+          document.getElementById("message").innerText = "Erreur réseau.";
+        });
+    });
+</script>

@@ -1,0 +1,6 @@
+<h2>Résultat du paiement</h2>
+<p>Référence: {{ reference }}</p>
+<p>Montant: {{ montant }} FCFA</p>
+<p>Numéro client: {{ numero }}</p>
+<p>Statut: <strong>{{ statut|title }}</strong></p>
+<a href="{% url 'simuler_paiement' %}">Revenir</a>

@@ -1,0 +1,12 @@
+<ul>
+  {% for node in arbre %}
+  <li>
+    <a href="{% url 'arbre_genealogique_complet' node.personne.id %}">
+      {{ node.personne.prenom }} {{ node.personne.nom }}
+    </a>
+    {% if node.enfants %}
+    <p>{% include "arbre_recursive.html" with arbre=node.enfants %}</p>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>

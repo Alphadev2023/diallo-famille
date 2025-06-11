@@ -1,0 +1,10 @@
+<li>
+  {{ person.first_name }} {{ person.last_name }} {% with
+  children=person.children_from_mother.all|union:person.children_from_father.all
+  %} {% if children %}
+  <ul>
+    {% for child in children %} {% include "tree_node.html" with person=child %}
+    {% endfor %}
+  </ul>
+  {% endif %}
+</li>

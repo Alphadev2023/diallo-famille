@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      Arbre généalogique complet de {{ personne.prenom }} {{ personne.nom }}
+    </title>
+    <style>
+      ul {
+        list-style-type: none;
+      }
+      li {
+        margin-left: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>
+      Arbre généalogique complet de {{ personne.prenom }} {{ personne.nom }}
+    </h1>
+
+    <h2>Parents</h2>
+    <p>Père : {{ personne.pere.prenom }} {{ personne.pere.nom }}</p>
+    <p>{% if not personne.pere %}Inconnu{% endif %}</p>
+    <p>Mère : {{ personne.mere.prenom }} {{ personne.mere.nom }}</p>
+    <p>{% if not personne.mere %}Inconnue{% endif %}</p>
+
+    <h2>Descendance</h2>
+    {% include "arbre_recursive.html" with arbre=arbre %}
+  </body>
+</html>

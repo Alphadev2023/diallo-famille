@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      Arbre généalogique de {{ personne.prenom }} {{ personne.nom }}
+    </title>
+  </head>
+  <body>
+    <h1>Arbre généalogique de {{ personne.prenom }} {{ personne.nom }}</h1>
+
+    <h2>Parents</h2>
+    <p>Père : {{ personne.pere.prenom }} {{ personne.pere.nom }}</p>
+    <p>{% if not personne.pere %} Inconnu {% endif %}</p>
+    <p>Mère : {{ personne.mere.prenom }} {{ personne.mere.nom }}</p>
+    <p>{% if not personne.mere %}Inconnue{% endif %}</p>
+
+    <h2>Enfants</h2>
+    {% if enfants %}
+    <ul>
+      {% for enfant in enfants %}
+      <li>
+        <a href="{% url 'arbre_genealogique' enfant.id %}"
+          >{{ enfant.prenom }} {{ enfant.nom }}</a
+        >
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>Aucun enfant enregistré.</p>
+    {% endif %}
+  </body>
+</html>
