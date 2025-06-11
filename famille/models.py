@@ -45,7 +45,11 @@ class Famille(models.Model):
     def __str__(self):
         return self.nom
 
+class Metier(models.Model):
+    nom = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.nom
 
 class Person(models.Model):
     GENDER_CHOICES = [
@@ -53,7 +57,7 @@ class Person(models.Model):
         ('F', 'Female'),
     ]
     user = models.ForeignKey(User, on_delete = models.CASCADE, null=True, blank =True)
-
+    metier = models.ForeignKey(Metier, on_delete=models.CASCADE, related_name="personne", null=True, blank=True)
     nom = models.CharField(max_length=100, blank=True, null=True)
     prenom = models.CharField(max_length=100, blank=True, null=True)
     genre = models.CharField(max_length=1, choices=GENDER_CHOICES)
@@ -66,6 +70,7 @@ class Person(models.Model):
     mere = models.ForeignKey('self', null=True, blank=True, related_name='children_from_mother', on_delete=models.SET_NULL)
     pere = models.ForeignKey('self', null=True, blank=True, related_name='children_from_father', on_delete=models.SET_NULL)
     mari = models.ForeignKey("self", null=True, blank=True, related_name="father_from_mother", on_delete=models.SET_NULL)
+    reseidence_actuel = models.ForeignKey(Pays, on_delete=models.CASCADE, related_name='residence', null=True, blank=True)
 
     def __str__(self):
         return f"{self.nom} {self.prenom}"

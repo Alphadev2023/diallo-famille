@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import (
     Continent, Pays, Ville, District,
-    Famille, Person, Cotisation
+    Famille, Person, Cotisation, Metier
 )
 
 # Register your models here.
@@ -15,6 +15,11 @@ class ContinentAdmin(admin.ModelAdmin):
 class PaysAdmin(admin.ModelAdmin):
  list_display = ['nom', 'continent']
  list_filter = ['continent']
+
+@admin.register(Cotisation)
+class CotisationAdmin(admin.ModelAdmin):
+ list_display = ['personne', 'montant', 'date_paiement', 'mode_paiement', 'reference', 'motif']
+ list_filter = ['date_paiement']
 
 
 @admin.register(Ville)
@@ -34,6 +39,11 @@ class FamilleAdmin(admin.ModelAdmin):
  list_display = ['nom', 'district']
  list_filter = ['district']
  search_fields = ['nom', 'prenom']
+
+@admin.register(Metier)
+class MetierAdmin(admin.ModelAdmin):
+ list_display = ['nom']
+ list_filter = ['nom']
 
 
 class MariFilter(admin.ModelAdmin):
