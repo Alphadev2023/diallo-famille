@@ -7,7 +7,7 @@ from .serializers import (
     FamilleSerializer, PersonneSerializer, CotisationSerializer)
 
 from django.shortcuts import render, redirect
-from .forms import CotisationForm
+from .forms import CotisationForm, PaiementForm
 from django.http import HttpResponse
 from django.db.models import Sum
 from django.contrib.auth.decorators import login_required, user_passes_test
