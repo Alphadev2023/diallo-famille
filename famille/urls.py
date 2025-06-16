@@ -18,6 +18,7 @@ router.register(r'personnes', PersonneViewSet)
 router.register(r'cotisations', CotisationViewSet)
 
 urlpatterns = [
+ path('', views.index, name='index'),
  path('famille/<int:person_id>/', views.family_tree, name='family_tree'),
  path('famille/<int:person_id>/json/', views.tree_data, name='tree_data'),
  path('famille/<int:person_id>/d3/', views.d3_tree_view, name='d3_tree_view'),

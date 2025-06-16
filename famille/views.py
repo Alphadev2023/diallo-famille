@@ -21,6 +21,12 @@ from .models import Cotisation
 def is_gestionnaire(user):
     return user.groups.filter(name='gestionnaire').exists()
 
+
+@login_required
+def index(request):
+    personne = Person.objects.all()
+    return render(request, "index.html")
+
 @login_required
 def family_tree(request, person_id):
     person = get_object_or_404(Person, id=person_id)
@@ -55,10 +61,10 @@ def ajouter_cotisation(request):
         form = CotisationForm()
     return render(request, 'ajouter_cotisation.html', {'form': form})
 
-
+### les cotisations 
 def cotisation_success(request):
     return HttpResponse("Cotisation enregistrée avec succès !")
-
+### Section de creation d'API pour l'arbre famillial
 class ContinentViewSet(viewsets.ModelViewSet):
     queryset = Continent.objects.all()
     serializer_class = ContinentSerializer
@@ -87,6 +93,8 @@ class CotisationViewSet(viewsets.ModelViewSet):
     queryset = Cotisation.objects.all()
     serializer_class = CotisationSerializer
 
+
+@login_required
 def arbre_genealogique(request, personne_id):
     personne = get_object_or_404(Person, id=personne_id)
 
@@ -98,6 +106,8 @@ def arbre_genealogique(request, personne_id):
         'enfants': enfants.distinct()
     })
 
+
+@login_required
 def get_enfants_recursif(personne):
     enfants = Person.objects.filter(pere=personne) | Person.objects.filter(mere=personne)
     enfants = enfants.distinct()
@@ -110,7 +120,7 @@ def get_enfants_recursif(personne):
         })
     return arbre
 
-
+@login_required
 def arbre_genealogique_complet(request, personne_id):
     personne = get_object_or_404(Person, id=personne_id)
     arbre = get_enfants_recursif(personne)
@@ -120,7 +130,7 @@ def arbre_genealogique_complet(request, personne_id):
         'arbre': arbre
     })
 
-
+@login_required
 def get_arbre_data(personne):
     nodes = []
     edges = []
