@@ -22,7 +22,7 @@ body {
  color: #a0a3bd;
  transition: all 0.2s ease;
  border-radius: 8px;
- margin: 4px 16px;
+ margin: 4px 10px;
  white-space: nowrap;
  overflow: hidden;
 }

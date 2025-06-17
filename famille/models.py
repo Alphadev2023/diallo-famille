@@ -58,6 +58,7 @@ class Person(models.Model):
     ]
     user = models.ForeignKey(User, on_delete = models.CASCADE, null=True, blank =True)
     metier = models.ForeignKey(Metier, on_delete=models.CASCADE, related_name="personne", null=True, blank=True)
+    code_unique = models.CharField(max_length=150, blank=True, null=True, unique=True)
     nom = models.CharField(max_length=100, blank=True, null=True)
     prenom = models.CharField(max_length=100, blank=True, null=True)
     genre = models.CharField(max_length=1, choices=GENDER_CHOICES)

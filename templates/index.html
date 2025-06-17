@@ -1,10 +1,65 @@
 {% extends "include/base.html" %} 
 {% block title %}Page d'accueil{% endblock %}
 {% block content %}
-<div class="col-6 col-sm-4">
-  <h1>Bienvenue sur ma page d'accueil !</h1>
-  <p>
-    Ceci est le contenu de la page d'accueil, qui utilise le layout de base.
-  </p>
+<div class="container-fluid pb-3 pt-3">
+  <div class="pb-3">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card bg-primary bg-gradient text-white">
+          <div class="card-body">
+            <h5 class="card-title">Personne avec Metier</h5>
+            <p class="card-text">120 K</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card bg-success bg-gradient text-white">
+          <div class="card-body">
+            <h5 class="card-title">Personne en Europe</h5>
+            <p class="card-text">1000 K</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card bg-secondary bg-gradient text-white">
+          <div class="card-body">
+            <h5 class="card-title">Personne au USA</h5>
+            <p class="card-text">2500 K</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Code</th>
+        <th>Nom et Prenom</th>
+        <th>Telephone</th>
+        <th>Pays de residence</th>
+        <th>Ville de resistance</th>
+        <th>Metier</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>AL89</td>
+        <td>Diallo Mamadou Aliou</td>
+        <td>(+224) 621 55 15 20</td>
+        <td>Guinee</td>
+        <td>Conakry</td>
+        <td>Electronicien</td>
+      </tr>
+      <tr>
+        <td>AS10</td>
+        <td>Diallo Aisssatou</td>
+        <td>(+224) 621 55 20 10</td>
+        <td>France</td>
+        <td>Paris</td>
+        <td>Informatique</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 {% endblock %}

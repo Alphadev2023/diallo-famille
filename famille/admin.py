@@ -48,7 +48,7 @@ class MetierAdmin(admin.ModelAdmin):
 
 class MariFilter(admin.ModelAdmin):
  class Media:
-  js = ('/media/js/person_admin.js',)
+  js = ('/static/js/person_admin.js',)
  
 
   
