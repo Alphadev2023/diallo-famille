@@ -71,7 +71,7 @@ class Person(models.Model):
     mere = models.ForeignKey('self', null=True, blank=True, related_name='children_from_mother', on_delete=models.SET_NULL)
     pere = models.ForeignKey('self', null=True, blank=True, related_name='children_from_father', on_delete=models.SET_NULL)
     mari = models.ForeignKey("self", null=True, blank=True, related_name="father_from_mother", on_delete=models.SET_NULL)
-    reseidence_actuel = models.ForeignKey(Pays, on_delete=models.CASCADE, related_name='residence', null=True, blank=True)
+    reseidence_actuel = models.ForeignKey(Ville, on_delete=models.CASCADE, related_name='residence', null=True, blank=True)
 
     def __str__(self):
         return f"{self.nom} {self.prenom}"
