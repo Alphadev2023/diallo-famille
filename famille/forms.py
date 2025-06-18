@@ -1,5 +1,5 @@
 from django import forms
-from .models import Cotisation
+from .models import Cotisation, Person
 
 class PaiementForm(forms.Form):
    numero_client = forms.CharField(label="Numéro Orange", max_length=20)
@@ -14,4 +14,11 @@ class CotisationForm(forms.ModelForm):
    'motif': forms.Textarea(attrs={'rows': 2}),
   }
  
+ 
+class SearchPersonByCode(forms.Form):
+  code = forms.CharField(
+        label='Code personne',
+        max_length=100,
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
  

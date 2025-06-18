@@ -2,7 +2,29 @@
 {% block title %}Page d'accueil{% endblock %}
 {% block content %}
 <div class="container-fluid pb-3 pt-3">
-  <div class="pb-3">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-12 col-lg-12">
+        <form class="card card-sm">
+            <div class="card-body row no-gutters align-items-center">
+                <div class="col-auto">
+                    <i class="fas fa-search h4 text-body"></i>
+                </div>
+                <!--end of col-->
+                <div class="col">
+                    <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Search topics or keywords">
+                </div>
+                <!--end of col-->
+                <div class="col-auto">
+                    <button class="btn btn-lg btn-success" type="submit">Search</button>
+                </div>
+                <!--end of col-->
+            </div>
+        </form>
+    </div>
+    <!--end of col-->
+</div>
+</div>
+  <div class="col-12 pb-3">
     <div class="row">
       <div class="col-md-4">
         <div class="card bg-primary bg-gradient text-white">
@@ -37,9 +59,9 @@
         <th>Code</th>
         <th>Nom et Prenom</th>
         <th>Telephone</th>
-        <th>Pays de residence</th>
-        <th>Ville de resistance</th>
-        <th>Ville de resistance</th>
+        <th>Residence Actuelle</th>
+        <th>Pere</th>
+        <th>Mere</th>
         <th>Metier</th>
       </tr>
     </thead>

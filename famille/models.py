@@ -56,9 +56,10 @@ class Person(models.Model):
         ('M', 'Male'),
         ('F', 'Female'),
     ]
-    user = models.ForeignKey(User, on_delete = models.CASCADE, null=True, blank =True)
-    metier = models.ForeignKey(Metier, on_delete=models.CASCADE, related_name="personne", null=True, blank=True)
-    code_unique = models.CharField(max_length=150, blank=True, null=True, unique=True)
+    #user = models.ForeignKey(User, on_delete = models.CASCADE, null=True, blank =True)
+    code_unique = models.CharField(max_length=150, blank=True,  primary_key=True)
+    
+    
     nom = models.CharField(max_length=100, blank=True, null=True)
     prenom = models.CharField(max_length=100, blank=True, null=True)
     genre = models.CharField(max_length=1, choices=GENDER_CHOICES)
@@ -67,7 +68,8 @@ class Person(models.Model):
     image = models.ImageField(upload_to='images/', blank=True, null=True)
     date_naissance = models.DateField(null=True, blank=True)
     date_decce = models.DateField(null=True, blank=True)
-    famille = models.ForeignKey(Famille, on_delete=models.CASCADE, related_name='personnes', null=True, blank=True)
+    #famille = models.ForeignKey(Famille, on_delete=models.CASCADE, related_name='personnes', null=True, blank=True)
+    metier = models.ForeignKey(Metier, on_delete=models.CASCADE, related_name="personne", null=True, blank=True)
     mere = models.ForeignKey('self', null=True, blank=True, related_name='children_from_mother', on_delete=models.SET_NULL)
     pere = models.ForeignKey('self', null=True, blank=True, related_name='children_from_father', on_delete=models.SET_NULL)
     mari = models.ForeignKey("self", null=True, blank=True, related_name="father_from_mother", on_delete=models.SET_NULL)
