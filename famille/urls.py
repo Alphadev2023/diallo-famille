@@ -4,8 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
 from .views import (
-    ContinentViewSet, PaysViewSet, VilleViewSet, DistrictViewSet,
-    FamilleViewSet, PersonneViewSet, CotisationViewSet)
+    ContinentViewSet, PaysViewSet, VilleViewSet, DistrictViewSet, PersonneViewSet, CotisationViewSet)
 
 
 router = DefaultRouter()
@@ -13,7 +12,6 @@ router.register(r'continents', ContinentViewSet)
 router.register(r'pays', PaysViewSet)
 router.register(r'villes', VilleViewSet)
 router.register(r'districts', DistrictViewSet)
-router.register(r'familles', FamilleViewSet)
 router.register(r'personnes', PersonneViewSet)
 router.register(r'cotisations', CotisationViewSet)
 

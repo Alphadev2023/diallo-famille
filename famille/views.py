@@ -1,10 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from rest_framework import viewsets
-from .models import Continent, Pays, Ville, District, Famille, Person, Cotisation
+from .models import Continent, Pays, Ville, District, Person, Cotisation
 from .serializers import (
-    ContinentSerializer, PaysSerializer, VilleSerializer, DistrictSerializer,
-    FamilleSerializer, PersonneSerializer, CotisationSerializer)
+    ContinentSerializer, PaysSerializer, VilleSerializer, DistrictSerializer, PersonneSerializer, CotisationSerializer)
 
 from django.shortcuts import render, redirect
 from .forms import CotisationForm, PaiementForm
@@ -81,9 +80,9 @@ class DistrictViewSet(viewsets.ModelViewSet):
     queryset = District.objects.all()
     serializer_class = DistrictSerializer
 
-class FamilleViewSet(viewsets.ModelViewSet):
+"""class FamilleViewSet(viewsets.ModelViewSet):
     queryset = Famille.objects.all()
-    serializer_class = FamilleSerializer
+    serializer_class = FamilleSerializer"""
 
 class PersonneViewSet(viewsets.ModelViewSet):
     queryset = Person.objects.all()

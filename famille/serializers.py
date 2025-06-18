@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Continent, Pays, Ville, District, Famille, Person, Cotisation
+from .models import Continent, Pays, Ville, District, Person, Cotisation
 
 class ContinentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -25,10 +25,10 @@ class DistrictSerializer(serializers.ModelSerializer):
         fields = ['id', 'nom', 'ville']
 
 
-class FamilleSerializer(serializers.ModelSerializer):
+"""class FamilleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Famille
-        fields = ['id', 'nom', 'district']
+        fields = ['id', 'nom', 'district']"""
 
 
 class PersonneSerializer(serializers.ModelSerializer):

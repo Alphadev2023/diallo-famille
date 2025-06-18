@@ -37,13 +37,7 @@ class District(models.Model):
         return self.nom
 
 
-# --------- 5. Famille ---------
-class Famille(models.Model):
-    nom = models.CharField(max_length=100)
-    district = models.ForeignKey(District, on_delete=models.CASCADE, related_name='familles')
 
-    def __str__(self):
-        return self.nom
 
 class Metier(models.Model):
     nom = models.CharField(max_length=100)
@@ -56,6 +50,11 @@ class Person(models.Model):
         ('M', 'Male'),
         ('F', 'Female'),
     ]
+
+    EST_VIVANT = [
+        ('V', 'VIVANT'), 
+        ('D', 'Décedé'),
+    ]
     #user = models.ForeignKey(User, on_delete = models.CASCADE, null=True, blank =True)
     code_unique = models.CharField(max_length=150, blank=True,  primary_key=True)
     
@@ -63,8 +62,10 @@ class Person(models.Model):
     nom = models.CharField(max_length=100, blank=True, null=True)
     prenom = models.CharField(max_length=100, blank=True, null=True)
     genre = models.CharField(max_length=1, choices=GENDER_CHOICES)
+    est_vivant = models.CharField(max_length=1, choices=EST_VIVANT, null=True, blank=True)
     email = models.CharField(max_length=100, blank=True, null=True)
     telephone = models.CharField(max_length=100, blank=True, null=True)
+    nationalite = models.CharField(max_length=100, blank=True, null=True)
     image = models.ImageField(upload_to='images/', blank=True, null=True)
     date_naissance = models.DateField(null=True, blank=True)
     date_decce = models.DateField(null=True, blank=True)
@@ -73,6 +74,7 @@ class Person(models.Model):
     mere = models.ForeignKey('self', null=True, blank=True, related_name='children_from_mother', on_delete=models.SET_NULL)
     pere = models.ForeignKey('self', null=True, blank=True, related_name='children_from_father', on_delete=models.SET_NULL)
     mari = models.ForeignKey("self", null=True, blank=True, related_name="father_from_mother", on_delete=models.SET_NULL)
+    district = models.ForeignKey(District, on_delete=models.CASCADE, related_name="district", null=True, blank=True)
     reseidence_actuel = models.ForeignKey(Ville, on_delete=models.CASCADE, related_name='residence', null=True, blank=True)
 
     def __str__(self):

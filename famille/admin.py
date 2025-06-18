@@ -1,7 +1,6 @@
 from django.contrib import admin
 from .models import (
-    Continent, Pays, Ville, District,
-    Famille, Person, Cotisation, Metier
+    Continent, Pays, Ville, District, Person, Cotisation, Metier
 )
 
 # Register your models here.
@@ -34,11 +33,11 @@ class DistrictAdmin(admin.ModelAdmin):
  list_filter = ['ville']
 
 
-@admin.register(Famille)
+"""@admin.register(Famille)
 class FamilleAdmin(admin.ModelAdmin):
  list_display = ['nom', 'district']
  list_filter = ['district']
- search_fields = ['nom', 'prenom']
+ search_fields = ['nom', 'prenom']"""
 
 @admin.register(Metier)
 class MetierAdmin(admin.ModelAdmin):
