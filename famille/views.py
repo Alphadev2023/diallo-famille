@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect, redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from rest_framework import viewsets
 from .models import Continent, Pays, Ville, District, Person, Cotisation
@@ -14,7 +14,6 @@ import random
 import uuid
 from django.db import models
 from django.core.paginator import Paginator
-from .models import Cotisation
 from django.contrib.auth.views import LoginView
 from .forms import CustomLoginForm
 

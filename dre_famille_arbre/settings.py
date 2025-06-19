@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "famille",
     "rest_framework",
-    "crispy_forms",
     'bootstrap5',
     'fontawesomefree',
 ]
