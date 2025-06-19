@@ -2,13 +2,19 @@ services:
   - type: web
     name: dre-famille-arbre
     env: python
-    plan: free
-    buildCommand: pip install -r requirements.txt
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
+      python manage.py migrate
     startCommand: gunicorn dre_famille_arbre.wsgi:application --bind 0.0.0.0:$PORT
     envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: dre_famille_arbre.settings
+      - key: PYTHONPATH
+        value: /opt/render/project/src
       - key: DJANGO_SECRET_KEY
-        generateValue: true
+        fromDatabase: true
       - key: DEBUG
         value: "False"
       - key: ALLOWED_HOSTS
-        value: dre-famille-arbre.onrender.com
+        value: .onrender.com
