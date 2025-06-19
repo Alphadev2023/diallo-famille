@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     "famille",
     "rest_framework",
     'bootstrap5',
-    'fontawesomefree',
+    'fontawesome',
 ]
 
 MIDDLEWARE = [
