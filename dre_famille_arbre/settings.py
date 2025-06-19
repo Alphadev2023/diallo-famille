@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "unsafe-secret")
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "tw(p@gr#s8n%p6$y&$$+c5pah1-mhaee*$hxryonezxguiry&_")
 #DEBUG = os.environ.get("DEBUG", "False") == "True"
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.onrender.com']
 
