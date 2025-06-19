@@ -1,7 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Arbre Généalogique (D3.js)</title>
+{% extends "include/base.html" %} 
+{% block title %}Page d'accueil{% endblock %}
+{% block content %}
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <style>
       .node circle {
@@ -21,7 +20,7 @@
     <h2>Vue graphique de l'arbre</h2>
     <svg width="1200" height="600"></svg>
     <script>
-      fetch("{% url 'tree_data' person.id %}")
+      fetch("{% url 'tree_data' person.code_unique %}")
         .then((res) => res.json())
         .then((data) => {
           const root = d3.hierarchy(data);
@@ -63,5 +62,4 @@
             .text((d) => d.data.name);
         });
     </script>
-  </body>
-</html>
+{% endblock %}

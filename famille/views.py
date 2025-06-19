@@ -122,7 +122,7 @@ def arbre_genealogique(request, code):
     })
 
 
-@login_required
+
 def get_enfants_recursif(personne):
     enfants = Person.objects.filter(pere=personne) | Person.objects.filter(mere=personne)
     enfants = enfants.distinct()
@@ -189,7 +189,7 @@ def api_cotisations(request):
     if request.method == "POST":
         data = json.loads(request.body)
         try:
-            personne = Person.objects.get(id=data['personne'])
+            personne = Person.objects.get(code_unique=data['personne'])
             montant = float(data['montant'])
             if montant <= 0:
                 return JsonResponse({'status': 'error', 'message': 'Montant doit être positif'}, status=400)

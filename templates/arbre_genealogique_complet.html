@@ -1,19 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>
-      Arbre généalogique complet de {{ personne.prenom }} {{ personne.nom }}
-    </title>
-    <style>
-      ul {
-        list-style-type: none;
-      }
-      li {
-        margin-left: 20px;
-      }
-    </style>
-  </head>
-  <body>
+{% extends "include/base.html" %} 
+{% block title %}Page d'accueil{% endblock %}
+{% block content %}
     <h1>
       Arbre généalogique complet de {{ personne.prenom }} {{ personne.nom }}
     </h1>
@@ -26,5 +13,4 @@
 
     <h2>Descendance</h2>
     {% include "arbre_recursive.html" with arbre=arbre %}
-  </body>
-</html>
+{% endblock %}
