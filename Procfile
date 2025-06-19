@@ -1,1 +1,1 @@
-gunicorn dre_famille_arbre.wsgi:application --bind 0.0.0.0:$PORT
+web: gunicorn dre_famille_arbre.wsgi:application --bind 0.0.0.0:$PORT
