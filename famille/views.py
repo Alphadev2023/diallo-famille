@@ -1,11 +1,10 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, redirect
 from django.http import JsonResponse
 from rest_framework import viewsets
 from .models import Continent, Pays, Ville, District, Person, Cotisation
 from .serializers import (
     ContinentSerializer, PaysSerializer, VilleSerializer, DistrictSerializer, PersonneSerializer, CotisationSerializer)
-from .forms import SearchPersonByCode
-from django.shortcuts import render, redirect
+from .forms import SearchPersonByCode 
 from .forms import CotisationForm, PaiementForm
 from django.http import HttpResponse
 from django.db.models import Sum

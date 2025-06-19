@@ -1,5 +1,5 @@
 from django import forms
-from .models import Cotisation, Person
+from .models import Cotisation
 from django.contrib.auth.forms import AuthenticationForm
 
 class PaiementForm(forms.Form):
