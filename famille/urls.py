@@ -23,6 +23,8 @@ urlpatterns = [
  path('cotisation/ajouter/', views.ajouter_cotisation, name='ajouter_cotisation'),
  path('api/', include(router.urls)),
  path('payer/', views.simuler_paiement, name='simuler_paiement'),
+ 
+ path("login/", views.CustomLoginView.as_view(), name="login"),
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += [

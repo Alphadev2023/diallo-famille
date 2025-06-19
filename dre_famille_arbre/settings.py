@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "famille",
     "rest_framework",
+    "crispy_forms",
     'bootstrap5',
     'fontawesomefree',
 ]
@@ -103,6 +104,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
@@ -131,6 +135,8 @@ STATICFILES_DIRS = [
 
 # Pour collecter tous les fichiers dans un seul dossier (en prod)
 STATIC_ROOT = BASE_DIR / "staticfiles"
+LOGIN_URL = "/login/"
+LOGIN_REDIRECT_URL = "/" 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 

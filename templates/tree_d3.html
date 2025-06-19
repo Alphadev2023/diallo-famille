@@ -14,9 +14,48 @@
         stroke: #555;
         stroke-width: 1.5px;
       }
+
+      svg {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+       }
+       
+       .node circle {
+        fill: #4caf50;
+        stroke: #2e7d32;
+        stroke-width: 2px;
+       }
+       
+       .node text {
+        font-size: 14px;
+        fill: #333;
+       }
+       
+       .link {
+        fill: none;
+        stroke: #90a4ae;
+        stroke-width: 2px;
+       }
+       
+       .node:hover circle {
+        fill: #66bb6a;
+        stroke: #388e3c;
+        cursor: pointer;
+       }
+       
+       .tooltip {
+        position: absolute;
+        background: white;
+        border: 1px solid #333;
+        padding: 8px;
+        border-radius: 4px;
+        box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+        pointer-events: none;
+        font-size: 13px;
+       }
+       
     </style>
-  </head>
-  <body>
     <h2>Vue graphique de l'arbre</h2>
     <svg width="1200" height="600"></svg>
     <script>
@@ -24,13 +63,13 @@
         .then((res) => res.json())
         .then((data) => {
           const root = d3.hierarchy(data);
-          const treeLayout = d3.tree().size([600, 800]);
+          const treeLayout = d3.tree().size([600, 750]);
           treeLayout(root);
 
           const svg = d3
             .select("svg")
             .append("g")
-            .attr("transform", "translate(10,0)");
+            .attr("transform", "translate(15,10)");
 
           svg
             .selectAll(".link")

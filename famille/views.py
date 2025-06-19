@@ -16,7 +16,13 @@ import uuid
 from django.db import models
 from django.core.paginator import Paginator
 from .models import Cotisation
+from django.contrib.auth.views import LoginView
+from .forms import CustomLoginForm
 
+#Custome login with django
+class CustomLoginView(LoginView):
+    template_name = "registration/login.html"
+    authentication_form = CustomLoginForm
 
 def is_gestionnaire(user):
     return user.groups.filter(name='gestionnaire').exists()
@@ -48,7 +54,7 @@ def family_tree(request, code):
     return render(request, 'family_tree.html', {'person': person})
 
 @login_required
-def tree_data(request, code ):
+def tree_data(request, code):
     person = get_object_or_404(Person, code_unique=code)
 
     def build_tree(p):
@@ -136,7 +142,7 @@ def get_enfants_recursif(personne):
     return arbre
 
 @login_required
-def arbre_genealogique_complet(request, code):
+def arbre_genealogique_complet(request, code="FMD1"):
     personne = get_object_or_404(Person, code_unique=code)
     arbre = get_enfants_recursif(personne)
 

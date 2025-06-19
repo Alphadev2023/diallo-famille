@@ -1,5 +1,6 @@
 from django import forms
 from .models import Cotisation, Person
+from django.contrib.auth.forms import AuthenticationForm
 
 class PaiementForm(forms.Form):
    numero_client = forms.CharField(label="Numéro Orange", max_length=20)
@@ -24,4 +25,11 @@ class SearchPersonByCode(forms.Form):
             'placeholder': 'code unique...'
         })
     )
+
+
+class CustomLoginForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].label = "Nom d'utilisateur"
+        self.fields['password'].label = "Mot de passe"
  

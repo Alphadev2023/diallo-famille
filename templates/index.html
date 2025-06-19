@@ -1,6 +1,15 @@
 {% extends "include/base.html" %} 
 {% block title %}Page d'accueil{% endblock %}
 {% block content %}
+<style>
+  th{
+    text-align: center;
+    font-weight: 600;
+  }
+  td{
+    text-align: center;
+  }
+</style>
 <div class="container-fluid pb-3 pt-3">
   <div class="row justify-content-center">
     <div class="col-12 col-md-12 col-lg-12">
@@ -81,11 +90,12 @@
                   <td>{{personne.metier}}</td>
                 </tr>
           {% endfor %}
-          <div class="pagination">
+          <nav class="style" aria-label="Page navigation">
+          <ul class="pagination pagination-minimal justify-content-center">
             <span class="step-links">
               {% if search.has_previous %}
-                <a href="?page=1">&laquo; première</a>
-                <a href="?page={{ search.previous_page_number }}">précédent</a>
+              <a class="page-link" href="?page=1">&laquo; première</a>
+              <a class="page-link" href="?page={{ search.previous_page_number }}">précédent</a>
               {% endif %}
           
               <span class="current">
@@ -93,11 +103,12 @@
               </span>
           
               {% if search.has_next %}
-                <a href="?page={{ search.next_page_number }}">suivant</a>
-                <a href="?page={{ search.paginator.num_pages }}">dernière &raquo;</a>
+              <a class="page-link" href="?page={{ search.next_page_number }}">suivant</a>
+              <a class="page-link" href="?page={{ search.paginator.num_pages }}">dernière &raquo;</a>
               {% endif %}
             </span>
-          </div>
+          </ul>
+        </nav>
       {% else %}
         {% for personne in page %}
           <tr>
@@ -110,11 +121,12 @@
             <td>{{personne.metier}}</td>
           </tr>
         {% endfor %}
-        <div class="pagination">
+        <nav class="style" aria-label="Page navigation example">
+        <ul class="pagination pagination-minimal justify-content-center">
           <span class="step-links">
             {% if page.has_previous %}
-              <a href="?page=1">&laquo; première</a>
-              <a href="?page={{ page.previous_page_number }}">précédent</a>
+            <a href="?page=1">&laquo; première</a>
+            <a href="?page={{ page.previous_page_number }}">précédent</a>
             {% endif %}
         
             <span class="current">
@@ -122,11 +134,12 @@
             </span>
         
             {% if page.has_next %}
-              <a href="?page={{ page.next_page_number }}">suivant</a>
-              <a href="?page={{ page.paginator.num_pages }}">dernière &raquo;</a>
+            <a href="?page={{ page.next_page_number }}">suivant</a>
+            <a href="?page={{ page.paginator.num_pages }}">dernière &raquo;</a>
             {% endif %}
           </span>
-        </div>
+        </ul>
+      </nav>
       {% endif %}
 
       

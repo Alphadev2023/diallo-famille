@@ -52,7 +52,7 @@ class Person(models.Model):
         ('V', 'VIVANT'), 
         ('D', 'Décedé'),
     ]
-    #user = models.ForeignKey(User, on_delete = models.CASCADE, null=True, blank =True)
+    user = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True)
     code_unique = models.CharField(max_length=150, blank=True,  primary_key=True)
     
     
