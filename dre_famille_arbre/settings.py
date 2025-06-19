@@ -25,10 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "unsafe-secret")
-DEBUG = os.environ.get("DEBUG", "False") == "True"
-ALLOWED_HOSTS = ['.onrender.com']
+#DEBUG = os.environ.get("DEBUG", "False") == "True"
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.onrender.com']
 
 if os.environ.get('RENDER') == 'true':
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -44,7 +43,9 @@ INSTALLED_APPS = [
     "famille",
     "rest_framework",
     'bootstrap5',
-    'fontawesome',
+    'fontawesomefree',
+    "widget_tweaks",
+    "crispy_forms",
 ]
 
 MIDDLEWARE = [
