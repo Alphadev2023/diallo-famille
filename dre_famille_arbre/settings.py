@@ -136,7 +136,7 @@ STATICFILES_DIRS = [
 ]
 
 # Pour collecter tous les fichiers dans un seul dossier (en prod)
-#STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 LOGIN_URL = "/login/"
 LOGIN_REDIRECT_URL = "/" 
 # Default primary key field type
