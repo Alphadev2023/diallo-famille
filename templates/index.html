@@ -4,14 +4,15 @@
 <div class="container-fluid pb-3 pt-3">
   <div class="row justify-content-center">
     <div class="col-12 col-md-12 col-lg-12">
-        <form class="card card-sm">
+        <form method="post" class="card card-sm">
             <div class="card-body row no-gutters align-items-center">
                 <div class="col-auto">
                     <i class="fas fa-search h4 text-body"></i>
                 </div>
                 <!--end of col-->
                 <div class="col">
-                    <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Search topics or keywords">
+                  {% csrf_token %}
+                  {{ form.as_p }}
                 </div>
                 <!--end of col-->
                 <div class="col-auto">
@@ -31,6 +32,7 @@
           <div class="card-body">
             <h5 class="card-title">Personne avec Metier</h5>
             <p class="card-text">120 K</p>
+            
           </div>
         </div>
       </div>
@@ -66,23 +68,79 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>AL89</td>
-        <td>Diallo Mamadou Aliou</td>
-        <td>(+224) 621 55 15 20</td>
-        <td>Guinee</td>
-        <td>Conakry</td>
-        <td>Electronicien</td>
-      </tr>
-      <tr>
+      {% if resultats %}
+        <h3 class="mt-4">Résultats :</h3>
+          {% for personne in search %}
+                <tr>
+                  <td>{{personne.code_unique}}</td>
+                  <td>{{personne.nom}} {{personne.prenom}}</td>
+                  <td>{{personne.telephone}}</td>
+                  <td>{{personne.reseidence_actuel}}</td>
+                  <td>{{personne.pere}}</td>
+                  <td>{{personne.mere}}</td>
+                  <td>{{personne.metier}}</td>
+                </tr>
+          {% endfor %}
+          <div class="pagination">
+            <span class="step-links">
+              {% if search.has_previous %}
+                <a href="?page=1">&laquo; première</a>
+                <a href="?page={{ search.previous_page_number }}">précédent</a>
+              {% endif %}
+          
+              <span class="current">
+                Page {{ search.number }} de {{ page.paginator.num_pages }}.
+              </span>
+          
+              {% if search.has_next %}
+                <a href="?page={{ search.next_page_number }}">suivant</a>
+                <a href="?page={{ search.paginator.num_pages }}">dernière &raquo;</a>
+              {% endif %}
+            </span>
+          </div>
+      {% else %}
+        {% for personne in page %}
+          <tr>
+            <td>{{personne.code_unique}}</td>
+            <td>{{personne.nom}} {{personne.prenom}}</td>
+            <td>{{personne.telephone}}</td>
+            <td>{{personne.reseidence_actuel}}</td>
+            <td>{{personne.pere}}</td>
+            <td>{{personne.mere}}</td>
+            <td>{{personne.metier}}</td>
+          </tr>
+        {% endfor %}
+        <div class="pagination">
+          <span class="step-links">
+            {% if page.has_previous %}
+              <a href="?page=1">&laquo; première</a>
+              <a href="?page={{ page.previous_page_number }}">précédent</a>
+            {% endif %}
+        
+            <span class="current">
+              Page {{ page.number }} de {{ page.paginator.num_pages }}.
+            </span>
+        
+            {% if page.has_next %}
+              <a href="?page={{ page.next_page_number }}">suivant</a>
+              <a href="?page={{ page.paginator.num_pages }}">dernière &raquo;</a>
+            {% endif %}
+          </span>
+        </div>
+      {% endif %}
+
+      
+      <!--<tr>
         <td>AS10</td>
         <td>Diallo Aisssatou</td>
         <td>(+224) 621 55 20 10</td>
         <td>France</td>
         <td>Paris</td>
         <td>Informatique</td>
-      </tr>
+      </tr>-->
     </tbody>
   </table>
+  <div>  
+  </div>
 </div>
 {% endblock %}

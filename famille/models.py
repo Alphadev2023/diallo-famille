@@ -59,7 +59,7 @@ class Person(models.Model):
     nom = models.CharField(max_length=100, blank=True, null=True)
     prenom = models.CharField(max_length=100, blank=True, null=True)
     genre = models.CharField(max_length=1, choices=GENDER_CHOICES)
-    est_vivant = models.CharField(max_length=1, choices=EST_VIVANT, null=True, blank=True)
+    est_vivant = models.CharField(max_length=1, choices=EST_VIVANT)
     email = models.CharField(max_length=100, blank=True, null=True)
     telephone = models.CharField(max_length=100, blank=True, null=True)
     nationalite = models.CharField(max_length=100, blank=True, null=True)
@@ -71,10 +71,11 @@ class Person(models.Model):
     pere = models.ForeignKey('self', null=True, blank=True, related_name='children_from_father', on_delete=models.SET_NULL)
     mari = models.ForeignKey("self", null=True, blank=True, related_name="father_from_mother", on_delete=models.SET_NULL)
     district = models.ForeignKey(District, on_delete=models.CASCADE, related_name="district", null=True, blank=True)
-    reseidence_actuel = models.ForeignKey(Ville, on_delete=models.CASCADE, related_name='residence', null=True, blank=True)
+    reseidence_actuel = models.ForeignKey(Pays, on_delete=models.CASCADE, related_name='residence', null=True, blank=True)
+
 
     def __str__(self):
-        return f"{self.nom} {self.prenom}"
+        return f"{self.code_unique} {self.nom} {self.prenom}"
 
 class Cotisation(models.Model):
     MODE_PAIEMENT_CHOICES = [

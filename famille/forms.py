@@ -14,11 +14,14 @@ class CotisationForm(forms.ModelForm):
    'motif': forms.Textarea(attrs={'rows': 2}),
   }
  
- 
+
 class SearchPersonByCode(forms.Form):
-  code = forms.CharField(
-        label='Code personne',
-        max_length=100,
-        widget=forms.TextInput(attrs={'class': 'form-control'})
+  recherche = forms.CharField(
+        label='Recherche',
+        required=False,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'code unique...'
+        })
     )
  

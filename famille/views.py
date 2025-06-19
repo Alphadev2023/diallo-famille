@@ -4,7 +4,7 @@ from rest_framework import viewsets
 from .models import Continent, Pays, Ville, District, Person, Cotisation
 from .serializers import (
     ContinentSerializer, PaysSerializer, VilleSerializer, DistrictSerializer, PersonneSerializer, CotisationSerializer)
-
+from .forms import SearchPersonByCode
 from django.shortcuts import render, redirect
 from .forms import CotisationForm, PaiementForm
 from django.http import HttpResponse
@@ -13,7 +13,8 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 import json
 import random
 import uuid
-
+from django.db import models
+from django.core.paginator import Paginator
 from .models import Cotisation
 
 
@@ -23,17 +24,32 @@ def is_gestionnaire(user):
 
 @login_required
 def index(request):
+    form = SearchPersonByCode()
+    resultats = []
+    
+    query = None
+    if request.method == 'POST':
+        form = SearchPersonByCode(request.POST)
+        if form.is_valid():
+            query = form.cleaned_data['recherche']
+            resultats = Person.objects.filter(
+                models.Q(code_unique__icontains=query)
+            )
     personne = Person.objects.all()
-    return render(request, "index.html")
+    paginator = Paginator(personne, 5)
+    page_number = request.GET.get('page')
+    page = paginator.get_page(page_number)
+    code_search = Person.objects.filter(pere=query) | Person.objects.filter(mere=query)
+    return render(request, 'index.html', {'form': form, 'search': code_search, 'resultats': resultats, 'person': personne, 'page': page})
 
 @login_required
-def family_tree(request, person_id):
-    person = get_object_or_404(Person, id=person_id)
+def family_tree(request, code):
+    person = get_object_or_404(Person, code_unique=code)
     return render(request, 'family_tree.html', {'person': person})
 
 @login_required
-def tree_data(request, person_id):
-    person = get_object_or_404(Person, id=person_id)
+def tree_data(request, code ):
+    person = get_object_or_404(Person, code_unique=code)
 
     def build_tree(p):
         return {
@@ -44,8 +60,8 @@ def tree_data(request, person_id):
     return JsonResponse(build_tree(person))
 
 @login_required
-def d3_tree_view(request, person_id):
-    person = get_object_or_404(Person, id=person_id)
+def d3_tree_view(request, code):
+    person = get_object_or_404(Person, code_unique=code)
     return render(request, 'tree_d3.html', {'person': person})
 
 
@@ -94,8 +110,8 @@ class CotisationViewSet(viewsets.ModelViewSet):
 
 
 @login_required
-def arbre_genealogique(request, personne_id):
-    personne = get_object_or_404(Person, id=personne_id)
+def arbre_genealogique(request, code):
+    personne = get_object_or_404(Person, code_unique=code)
 
     # Enfants directs (fils et filles)
     enfants = Person.objects.filter(pere=personne) | Person.objects.filter(mere=personne)
@@ -120,8 +136,8 @@ def get_enfants_recursif(personne):
     return arbre
 
 @login_required
-def arbre_genealogique_complet(request, personne_id):
-    personne = get_object_or_404(Person, id=personne_id)
+def arbre_genealogique_complet(request, code):
+    personne = get_object_or_404(Person, code_unique=code)
     arbre = get_enfants_recursif(personne)
 
     return render(request, 'arbre_genealogique_complet.html', {
@@ -149,19 +165,19 @@ def get_arbre_data(personne):
     return {'nodes': nodes, 'edges': edges}
 
 @login_required
-def arbre_graphique(request, personne_id):
-    personne = get_object_or_404(Person, id=personne_id)
+def arbre_graphique(request, code):
+    personne = get_object_or_404(Person, code_unique=code)
     return render(request, 'arbre_graphique.html', {'personne': personne})
 
 @login_required
-def arbre_graphique_data(request, personne_id):
-    personne = Person.objects.get(id=personne_id)
+def arbre_graphique_data(request, code):
+    personne = Person.objects.get(code_unique=code)
     data = get_arbre_data(personne)
     return JsonResponse(data)
 
 @login_required
-def cotisations_personne(request, personne_id):
-    cotisations = Cotisation.objects.filter(personne_id=personne_id).values(
+def cotisations_personne(request, code):
+    cotisations = Cotisation.objects.filter(code_unique=code).values(
         'id', 'montant', 'date_paiement', 'mode_paiement', 'reference', 'motif'
     ).order_by('-date_paiement')
     return JsonResponse(list(cotisations), safe=False)
