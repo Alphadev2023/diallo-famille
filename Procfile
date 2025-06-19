@@ -1,1 +1,1 @@
-web: gunicorn django_render_demo.wsgi:application
+web: gunicorn dre_famille_arbre.wsgi:application
