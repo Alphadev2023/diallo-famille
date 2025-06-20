@@ -112,7 +112,7 @@
       {% else %}
         {% for personne in page %}
           <tr>
-            <td>{{personne.code_unique}}</td>
+            <td><a href="{% url 'arbre_genealogique_complet' personne.code_unique %}" class="text-decoration-none p-2">{{personne.code_unique}}</a></td>
             <td>{{personne.nom}} {{personne.prenom}}</td>
             <td>{{personne.telephone}}</td>
             <td>{{personne.reseidence_actuel}}</td>

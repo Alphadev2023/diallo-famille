@@ -1,16 +1,19 @@
 {% extends "include/base.html" %} 
 {% block title %}Page d'accueil{% endblock %}
 {% block content %}
-    <h1>
+    <h2 style="background-color: #31323F;" class="text-white p-2">
       Arbre généalogique complet de {{ personne.prenom }} {{ personne.nom }}
-    </h1>
-
-    <h2>Parents</h2>
-    <p>Père : {{ personne.pere.prenom }} {{ personne.pere.nom }}</p>
-    <p>{% if not personne.pere %}Inconnu{% endif %}</p>
-    <p>Mère : {{ personne.mere.prenom }} {{ personne.mere.nom }}</p>
-    <p>{% if not personne.mere %}Inconnue{% endif %}</p>
-
-    <h2>Descendance</h2>
+    </h2>
+    
+    <h4>Les parents de {{ personne.prenom }} {{ personne.nom }}</h4>
+    <p>
+      Père : {{ personne.pere.prenom }} {{ personne.pere.nom }}
+      {% if not personne.pere %}Inconnu{% endif %}
+    </p>
+    <p>
+      Mère : {{ personne.mere.prenom }} {{ personne.mere.nom }}
+      {% if not personne.mere %}Inconnue{% endif %}
+    </p>
+    <h4>Les enfants de {{ personne.prenom }} {{ personne.nom }}</h4>
     {% include "arbre_recursive.html" with arbre=arbre %}
 {% endblock %}

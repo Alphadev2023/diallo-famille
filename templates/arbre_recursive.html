@@ -21,6 +21,15 @@
     border: 3px solid #4CAF50;
     box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
   }
+
+  .profile-img1 {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%; /* rond */
+    border: 3px solid #4CAF50;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+  }
   ul li{
     list-style: none;
   }
@@ -47,7 +56,18 @@
           </td>
           <td class="col-sm-5 align-middle">
             {% if node.personne.image %}
-            <img class="profile-img" src="{{ node.personne.image.url }}" alt="{{ node.personne.nom }} {{ node.personne.prenom }}" width="150" />
+            <img class="profile-img img-thumbnail" data-bs-toggle="modal" data-bs-target="#modal{{ forloop.counter }}" style="cursor:pointer;" src="{{ node.personne.image.url }}" alt="{{ node.personne.nom }} {{ node.personne.prenom }}" width="150" />
+
+            <div class="modal fade" id="modal{{ forloop.counter }}" tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-body text-center">
+                    <img class="profile-img1" src="{{ node.personne.image.url }}" class="img-fluid" alt="Image">
+                    <h3>{{ node.personne.nom }} {{ node.personne.prenom }}</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
           {% else %}
             <img src="{% static 'default.png' %}" alt="Aucune image" />
           {% endif %}
