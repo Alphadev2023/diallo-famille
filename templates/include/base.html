@@ -10,6 +10,10 @@
     {% bootstrap_javascript %}
     <link rel="stylesheet" href="{% static 'fontawesomefree/css/all.min.css' %}">
     <link href="{% static "css/style.css" %}" rel="stylesheet" />
+    <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
+/>
   </head>
   <body>
     
@@ -35,12 +39,6 @@
                     <i class="fa fa-sitemap me-3"></i>
                     <span class="hide-on-collapse">Arbre Complet</span>
                 </a>
-
-                <a href="{% url 'd3_tree_view' 'FMD1' %}" class="sidebar-link text-decoration-none p-2">
-                    <i class="fa fa-sitemap me-3"></i>
-                    <span class="hide-on-collapse">Abre Graphique</span>
-                </a>
-
                 <a href="{% url 'admin:index' %}" class="sidebar-link text-decoration-none p-2">
                     <i class="fa fa-user me-3"></i>
                     <span class="hide-on-collapse">Admin</span>

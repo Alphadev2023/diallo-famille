@@ -28,6 +28,9 @@ def is_gestionnaire(user):
 
 @login_required
 def index(request):
+    personnes_disponibles = list(Person.objects.exclude(image=''))
+    images_aleatoires = random.sample(personnes_disponibles, min(6, len(personnes_disponibles)))
+
     form = SearchPersonByCode()
     resultats = []
     
@@ -35,16 +38,16 @@ def index(request):
     if request.method == 'POST':
         form = SearchPersonByCode(request.POST)
         if form.is_valid():
-            query = form.cleaned_data['recherche']
+            query = form.cleaned_data['pays']
+            print("Recherche:", query)
             resultats = Person.objects.filter(
-                models.Q(code_unique__icontains=query)
-            )
+                models.Q(reseidence_actuel__nom__icontains=query)
+            ).order_by('nom')
     personne = Person.objects.all()
     paginator = Paginator(personne, 5)
     page_number = request.GET.get('page')
     page = paginator.get_page(page_number)
-    code_search = Person.objects.filter(pere=query) | Person.objects.filter(mere=query)
-    return render(request, 'index.html', {'form': form, 'search': code_search, 'resultats': resultats, 'person': personne, 'page': page})
+    return render(request, 'index.html', {'form': form, 'resultats': resultats, 'person': personne, 'page': page, 'images_aleatoires': images_aleatoires})
 
 @login_required
 def family_tree(request, code):

@@ -17,12 +17,12 @@ class CotisationForm(forms.ModelForm):
  
 
 class SearchPersonByCode(forms.Form):
-  recherche = forms.CharField(
-        label='Recherche',
+  pays = forms.CharField(
+        label='Recherche par pays',
         required=False,
         widget=forms.TextInput(attrs={
             'class': 'form-control',
-            'placeholder': 'code unique...'
+            'placeholder': 'Recherche par pays'
         })
     )
 
