@@ -22,7 +22,8 @@
             <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
               <h5>{{ personne.nom }} {{ personne.prenom }}</h5>
               <p>
-                
+                <p>Père: {{ personne.pere.nom|default:"Non renseigné" }} {{ personne.pere.prenom|default:"Non renseigné" }} </p>
+                <p>Mère: {{ personne.mere.nom|default:"Non renseigné" }} {{ personne.mere.prenom|default:"Non renseigné" }}</p>
                 {% if personne.mari %}
                 Son mari : {{ personne.mari.nom }} {{ personne.mari.prenom }} 
                 {% endif %}
