@@ -18,7 +18,7 @@
         <div class="carousel-inner">
           {% for personne in images_aleatoires %}
           <div class="carousel-item {% if forloop.first %}active{% endif %}">
-            <img src="{{ personne.image.url }}" class="d-block w-50" alt="{{ personne.nom }}" style="height: 400px; object-fit: cover;">
+            <img src="{{ personne.image.url }}" class="d-block w-100" alt="{{ personne.nom }}" style="height: 400px; object-fit: cover;">
             <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
               <h5>{{ personne.nom }} {{ personne.prenom }}</h5>
               <p>
